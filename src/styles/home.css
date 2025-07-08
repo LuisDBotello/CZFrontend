@@ -1,0 +1,20 @@
+.home-main {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.home-hero {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.home-hero p {
+  font-size: 1.2rem;
+  color: #444;
+}

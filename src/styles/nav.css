@@ -1,0 +1,101 @@
+.nav {
+  background-color: white;
+  padding: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.432);
+}
+
+.logo-ini {
+  width: 10vw;
+}
+
+.nav-container {
+  max-width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: white;
+
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2vw;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+.nav-links a {
+  color: #004a8b;
+  text-decoration: none;
+  font-weight: 500;
+  background-color: white;
+
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+  background-color: white;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #004a8b;
+}
+
+/* 🔽 Responsive styles */
+@media (max-width: 768px) {
+  .logo-ini {
+    width: 7rem;
+  }
+
+ .menu-toggle {
+  display: block;
+  position: absolute;
+  right: -1.5rem;   /* 🔁 Ajusta este valor para moverlo más a la derecha */
+  z-index: 20;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #004a8b;
+}
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    display: none;
+    padding: 0;
+    gap: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ✅ sombra sutil */
+    z-index: 15;
+  }
+
+  .nav-links.open {
+    display: flex;
+    background-color: white;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 0.5rem;
+    color: #004a8b;
+    background-color: white; /* ✅ fondo blanco individual para cada link */
+  }
+
+  .nav-links a:hover {
+    background-color: #f0f0f0; /* ✅ cambio sutil al pasar el mouse */
+  }
+}
