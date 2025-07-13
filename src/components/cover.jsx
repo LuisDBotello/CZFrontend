@@ -7,7 +7,11 @@ const Cover = () => {
     <div className="cover-container">
       <div className="cover-img">
         <div className="overlay-content">
-          <h2>Soluciones profesionales en limpieza</h2>
+          <h2 className='cover-text'>Soluciones profesionales en limpieza</h2>
+          <div className='cover-buttons'>            
+            <button className='tienda-button'>TIENDA</button>
+            <button className='contact-button'>CONTÁCTANOS</button>
+          </div>
         </div>
         <img src={Cover1} alt="Limpieza profesional" className="img" />
         

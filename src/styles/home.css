@@ -1,20 +1,18 @@
-.home-main {
-  padding: 2rem;
-  font-family: Arial, sans-serif;
+.gradient-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-.home-hero {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
+.gradient-background {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(125% 125% at 50% 10%, transparent 50%, #00b145 100%);
+  z-index: 1; 
+  pointer-events: none;
 }
 
-.home-hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.home-hero p {
-  font-size: 1.2rem;
-  color: #444;
+.gradient-content {
+  position: relative;
 }

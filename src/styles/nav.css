@@ -1,7 +1,12 @@
 .nav {
+  position: fixed;  
+  top: 0;              
+  left: 0;
+  width: 100%;        
   background-color: white;
   padding: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.432);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+  z-index: 1000;        
 }
 
 .logo-ini {
@@ -19,10 +24,11 @@
 
 }
 
-.nav-links {
+.nav-links {  
+  z-index: 20;
   list-style: none;
   display: flex;
-  gap: 2vw;
+  gap: 4vw;
   margin: 0;
   padding: 0;
   background-color: white;
@@ -32,8 +38,7 @@
   color: #004a8b;
   text-decoration: none;
   font-weight: 500;
-  background-color: white;
-
+  background-color: white;  
 }
 
 .nav-links a:hover {
@@ -50,7 +55,6 @@
   color: #004a8b;
 }
 
-/* 🔽 Responsive styles */
 @media (max-width: 768px) {
   .logo-ini {
     width: 7rem;
@@ -59,7 +63,8 @@
  .menu-toggle {
   display: block;
   position: absolute;
-  right: -1.5rem;   /* 🔁 Ajusta este valor para moverlo más a la derecha */
+  right: -1.5rem; 
+  top: -0.5rem;
   z-index: 20;
   font-size: 2rem;
   background: none;
@@ -79,7 +84,7 @@
     display: none;
     padding: 0;
     gap: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ✅ sombra sutil */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 15;
   }
 
@@ -92,10 +97,10 @@
     width: 100%;
     padding: 0.5rem;
     color: #004a8b;
-    background-color: white; /* ✅ fondo blanco individual para cada link */
+    background-color: white;
   }
 
   .nav-links a:hover {
-    background-color: #f0f0f0; /* ✅ cambio sutil al pasar el mouse */
+    background-color: #f0f0f0; 
   }
 }

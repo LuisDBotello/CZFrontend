@@ -1,0 +1,49 @@
+.seccion-productos {
+  padding-bottom: 1rem;
+  text-align: left;
+  justify-self: center;
+  width: 75vw;
+}
+
+.seccion-productos h2 {
+  color: #004a8b;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.grid-productos {
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.producto-card {
+  background: white;
+  padding: 1rem;
+  width: 10vw;
+  border-radius: 1rem;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.producto-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.producto-card h3 {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.producto-card p {
+  color: #007b88;
+  font-weight: bold;
+}
+.button-add{
+  
+}

@@ -1,19 +1,27 @@
 import React from 'react';
-import Nav from '../components/nav'; // Ajusta si tu ruta es diferente
+import Nav from '../components/nav';
 import Cover from '../components/cover';
+import Products from '../components/Products';
+import Ubicacion from '../components/Ubicacion';
+import Tienda from '../components/tienda-home';
+import BotonWhatsApp from '../components/whats-button';
+import '../styles/home.css'; // Asegúrate de importar el CSS
 
 const Home = () => {
   return (
-    <>
-      <Nav />
-      <Cover />
-      <main className="home-main">
-        <section className="home-hero">
-          <h1>Bienvenido a MiApp</h1>
-          <p>Esta es la página principal de tu sitio React.</p>
-        </section>
-      </main>
-    </>
+    <main className="home-main">
+      <div className="gradient-container">
+        <div className="gradient-background" />
+        <div className="gradient-content">
+          <Nav />
+          <Cover />
+          <Tienda />
+          <Ubicacion />
+          <Products />
+          <BotonWhatsApp />
+        </div>
+      </div>
+    </main>
   );
 };
 
