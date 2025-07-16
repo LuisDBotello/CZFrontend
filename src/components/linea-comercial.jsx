@@ -4,30 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/tienda.css';
 import { agregarAlCarrito } from '../utils/carrito';
 
-const LineaAutomotriz = () => {
+const LineaComercial = () => {
   const [articulos, setArticulos] = useState([]);
   const [loading, setLoading] = useState(true);
   const gridRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleAgregar = (item) => {
-    agregarAlCarrito({
-      artId: item.artId,
-      artNom: item.artNom,
-      artPrecio: item.artPrecio,
-      artFoto: item.artFoto,
-    });
-  };
-
   useEffect(() => {
     axios.get('http://192.168.100.53:8080/api/productos/linea/2')
       .then(res => {
-        const Automotriz = res.data.filter(
+        const Comercial = res.data.filter(
           articulo =>
             articulo.linea &&
-            articulo.linea.lineNom.toLowerCase().includes('automotriz')
+            articulo.linea.lineNom.toLowerCase().includes('comercial')
         );
-        setArticulos(Automotriz);
+        setArticulos(Comercial);
       })
       .catch(err => {
         console.error("Error al cargar artículos:", err);
@@ -51,11 +42,20 @@ const LineaAutomotriz = () => {
     navigate(`/producto/${id}`);
   };
 
-  if (loading) return <p>Cargando productos de línea Automotriz...</p>;
+  const handleAgregar = (item) => {
+    agregarAlCarrito({
+      artId: item.artId,
+      artNom: item.artNom,
+      artPrecio: item.artPrecio,
+      artFoto: item.artFoto
+    });
+  };
+
+  if (loading) return <p>Cargando productos de línea Comercial...</p>;
 
   return (
     <section className="seccion-productos">
-      <h2 className='linea-h2'>Línea Automotriz</h2>
+      <h2 className='linea-h2'>Línea Comercial</h2>
 
       <button className="btn-scroll btn-scroll-left" onClick={handleScrollLeft} aria-label="Desplazar a la izquierda">
         &#8249;
@@ -80,8 +80,8 @@ const LineaAutomotriz = () => {
             <button
               className="button-add"
               onClick={(e) => {
-                e.stopPropagation(); // evita que se dispare el navigate
-                handleAgregar(item); // pasa el item correcto
+                e.stopPropagation(); // Evita navegar al hacer clic en el botón
+                handleAgregar(item); // Pasa el item al handler
               }}
             >
               Agregar al carrito
@@ -97,4 +97,4 @@ const LineaAutomotriz = () => {
   );
 };
 
-export default LineaAutomotriz;
+export default LineaComercial;

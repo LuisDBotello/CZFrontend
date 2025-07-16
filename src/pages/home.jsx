@@ -1,7 +1,6 @@
 import React from 'react';
 import Nav from '../components/nav';
 import Cover from '../components/cover';
-import Products from '../components/Products';
 import Ubicacion from '../components/Ubicacion';
 import Tienda from '../components/tienda-home';
 import BotonWhatsApp from '../components/whats-button';
@@ -17,7 +16,6 @@ const Home = () => {
           <Cover />
           <Tienda />
           <Ubicacion />
-          <Products />
           <BotonWhatsApp />
         </div>
       </div>

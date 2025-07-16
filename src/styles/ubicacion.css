@@ -1,5 +1,5 @@
 .map-section{
-    width: 75vw;
+    width: 83vw;
     height: 70vh;
     justify-self: center;
 }
@@ -63,7 +63,7 @@
   overflow: hidden; /* Evita que algo se desborde */  
   position: relative;
   z-index: 1;
-  border-radius: 2rem;
+  border-radius: 1rem;
 }
 .ubicacion-fotos {
   display: grid;
