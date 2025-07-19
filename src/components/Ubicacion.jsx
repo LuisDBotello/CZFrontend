@@ -5,7 +5,7 @@ import Interior from "../assets/interior-cz.webp"
 
 const Ubicacion = () => {
   return (
-    <section className="map-section">
+    <section className="map-section" id='ubicacion'>
       <h2 className="map-title">Ubicación</h2>
       <div className="ubicacion-grid">
         <div className="ubicacion-contacto">

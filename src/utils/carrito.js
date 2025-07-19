@@ -24,3 +24,13 @@ export const obtenerCantidadCarrito = () => {
   const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
   return carrito.reduce((acc, item) => acc + item.cantidad, 0);
 };
+
+export const actualizarCantidad = (id, nuevaCantidad) => {
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  const actualizado = carrito.map(item =>
+    item.artId === id
+      ? { ...item, cantidad: Math.max(1, nuevaCantidad) } // no permite menos de 1
+      : item
+  );
+  localStorage.setItem('carrito', JSON.stringify(actualizado));
+};

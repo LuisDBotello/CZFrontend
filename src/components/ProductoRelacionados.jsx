@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useCarrito } from '../context/carritoContext'; // 👈 usa tu contexto
 
 const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
   const [relacionados, setRelacionados] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { agregarAlCarrito } = useCarrito(); // ✅ usar del contexto
 
   useEffect(() => {
     const obtenerRelacionados = async () => {
@@ -13,12 +15,12 @@ const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
         const palabrasClave = nombreProducto
           .toLowerCase()
           .split(' ')
-          .filter(p => p.length > 3); // palabras útiles
+          .filter(p => p.length > 3);
 
         const palabra1 = palabrasClave[0] || '';
         const palabra2 = palabrasClave[1] || '';
 
-        const res = await axios.get('http://localhost:8080/api/productos/productos-relacionados', {
+        const res = await axios.get('http://192.168.100.53:8080/api/productos/productos-relacionados', {
           params: {
             lineaId,
             palabra1,
@@ -35,14 +37,13 @@ const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
           return palabrasClave.some(palabra => nombre.includes(palabra));
         });
 
-        const porLinea = todos.filter(p => 
+        const porLinea = todos.filter(p =>
           p.artId !== actualId &&
           p.linea?.lineId === lineaId &&
           !porPalabras.some(pp => pp.artId === p.artId)
         );
 
         const combinados = [...porPalabras, ...porLinea].slice(0, 8);
-
         setRelacionados(combinados);
       } catch (err) {
         console.error('Error al obtener productos relacionados:', err);
@@ -53,13 +54,27 @@ const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
 
     obtenerRelacionados();
   }, [nombreProducto, lineaId, actualId]);
+  const [agregadoIds, setAgregadoIds] = useState([]);
 
+  const handleAgregarCarrito = (e, item) => {
+    e.stopPropagation();
+    agregarAlCarrito(item);
+
+    setAgregadoIds(prev => [...prev, item.artId]);
+
+    const evento = new Event('carrito-actualizado');
+    window.dispatchEvent(evento);
+
+    setTimeout(() => {
+      setAgregadoIds(prev => prev.filter(id => id !== item.artId));
+    }, 2000);
+  };
   if (loading) return <p>Cargando productos relacionados...</p>;
   if (relacionados.length === 0) return <p>No hay productos relacionados.</p>;
 
   return (
     <section className="seccion-productos">
-      <h2 className="linea-h2">Productos Relacionados</h2>
+      <h2 className="linea-h2">Podría interesarte</h2>
       <div className="grid-productos">
         {relacionados.map(prod => (
           <div
@@ -75,12 +90,15 @@ const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
               <h3>{prod.artNom}</h3>
               <p>${prod.artPrecio.toFixed(2)}</p>
             </div>
-            <button className="button-add" onClick={(e) => {
-              e.stopPropagation(); // evitar que se dispare el click del card
-              // aquí iría lógica para agregar al carrito
-              alert(`Agregado: ${prod.artNom}`);
-            }}>
-              Agregar al carrito
+            <button
+              className="button-add"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleAgregarCarrito(e, prod)
+                window.dispatchEvent(new Event('carrito-actualizado'));
+              }}
+            >
+              {agregadoIds.includes(prod.artId) ? '✔️' : 'Agregar al carrito'}
             </button>
           </div>
         ))}

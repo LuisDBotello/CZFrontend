@@ -3,7 +3,6 @@ import Nav from '../components/nav';
 import Cover from '../components/cover';
 import Ubicacion from '../components/Ubicacion';
 import Tienda from '../components/tienda-home';
-import BotonWhatsApp from '../components/whats-button';
 import '../styles/home.css'; // Asegúrate de importar el CSS
 
 const Home = () => {
@@ -16,7 +15,6 @@ const Home = () => {
           <Cover />
           <Tienda />
           <Ubicacion />
-          <BotonWhatsApp />
         </div>
       </div>
     </main>

@@ -2,13 +2,16 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/tienda.css';
-import { agregarAlCarrito } from '../utils/carrito';
+import Logo from '../assets/logo.png';
+import { useCarrito } from '../context/carritoContext'; // 👈 usar contexto
 
 const LineaResidencial = () => {
   const [articulos, setArticulos] = useState([]);
   const [loading, setLoading] = useState(true);
   const gridRef = useRef(null);
   const navigate = useNavigate();
+
+  const { agregarAlCarrito } = useCarrito(); // 👈 función del contexto
 
   useEffect(() => {
     axios.get('http://192.168.100.53:8080/api/productos/linea/2')
@@ -42,13 +45,20 @@ const LineaResidencial = () => {
     navigate(`/producto/${id}`);
   };
 
-  const handleAgregar = (item) => {
-    agregarAlCarrito({
-      artId: item.artId,
-      artNom: item.artNom,
-      artPrecio: item.artPrecio,
-      artFoto: item.artFoto
-    });
+  const [agregadoIds, setAgregadoIds] = useState([]);
+
+  const handleAgregarCarrito = (e, item) => {
+    e.stopPropagation();
+    agregarAlCarrito(item);
+
+    setAgregadoIds(prev => [...prev, item.artId]);
+
+    const evento = new Event('carrito-actualizado');
+    window.dispatchEvent(evento);
+
+    setTimeout(() => {
+      setAgregadoIds(prev => prev.filter(id => id !== item.artId));
+    }, 2000);
   };
 
   if (loading) return <p>Cargando productos de línea Residencial...</p>;
@@ -64,11 +74,14 @@ const LineaResidencial = () => {
       <div ref={gridRef} className="grid-productos">
         {articulos.length === 0 && <p>No hay productos disponibles para esta línea.</p>}
         {articulos.map((item) => (
-          <div
-            key={item.artId}
-            className="producto-card"
-            onClick={() => handleCardClick(item.artId)}
-          >
+          <div key={item.artId} className="producto-card" onClick={() => handleCardClick(item.artId)}>
+            {item.artCZ && (
+              <img
+                src={Logo}
+                alt="Producto CZ"
+                className="cz-icon"
+              />
+            )}
             <img
               src={item.artFoto ? `http://192.168.100.53:8080/${item.artFoto}` : '/img/default.jpg'}
               alt={item.artNom}
@@ -79,12 +92,9 @@ const LineaResidencial = () => {
             </div>
             <button
               className="button-add"
-              onClick={(e) => {
-                e.stopPropagation(); // Evita navegar al hacer clic en el botón
-                handleAgregar(item); // Pasa el item al handler
-              }}
+              onClick={(e) => handleAgregarCarrito(e, item)}
             >
-              Agregar al carrito
+              {agregadoIds.includes(item.artId) ? '✔️' : 'Agregar al carrito'}
             </button>
           </div>
         ))}

@@ -1,29 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/nav.css';
-import { obtenerCantidadCarrito } from '../utils/carrito';
-import Logo from '../assets/LogoIni.png'; // ajusta si tu logo está en otro lugar
-import Carrito from '../assets/carrito.png'
+import Logo from '../assets/LogoIni.png';
+import Carrito from '../assets/carrito.png';
 
 const Nav = () => {
   const [cantidadCarrito, setCantidadCarrito] = useState(0);
+  const [menuAbierto, setMenuAbierto] = useState(false);
   const iconRef = useRef(null);
 
   useEffect(() => {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    window.dispatchEvent(new Event('carrito-actualizado'));
     setCantidadCarrito(carrito.length);
   }, []);
 
-  // Escuchar cambios en el storage desde otros componentes
   useEffect(() => {
     const handleStorageChange = () => {
       const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
       setCantidadCarrito(carrito.length);
 
-      // Activar animación CSS
       if (iconRef.current) {
         iconRef.current.classList.remove('saltar');
-        void iconRef.current.offsetWidth; // fuerza reflujo para reiniciar la animación
+        void iconRef.current.offsetWidth;
         iconRef.current.classList.add('saltar');
       }
     };
@@ -34,28 +33,49 @@ const Nav = () => {
     };
   }, []);
 
+  const toggleMenu = () => setMenuAbierto(prev => !prev);
+
+  // Cerrar menú al hacer click en un link (opcional)
+  const handleLinkClick = () => {
+    if (menuAbierto) setMenuAbierto(false);
+  };
+
   return (
     <nav className="nav">
       <div className="nav-container">
-        <img src={Logo} className="logo-ini" alt="Logo" />
+        <Link to="/" onClick={handleLinkClick}>
+          <img src={Logo} className="logo-ini" alt="Logo" />
+        </Link>
 
-        <div className="nav-right">
+        <div>
+          
+        </div>
+
+        <div className={`nav-right ${menuAbierto ? 'open' : ''}`}>
           <ul className="nav-links">
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/tienda">Tienda</a></li>
-            <li><a href="/contacto">Contacto</a></li>
-            <li><a href="/nosotros">Nosotros</a></li>
-
+            <li><Link to="/" onClick={handleLinkClick}>Inicio</Link></li>
+            <li><Link to="/tienda" onClick={handleLinkClick}>Tienda</Link></li>
+            <li><Link to="/contacto" onClick={handleLinkClick}>Contacto</Link></li>
+            <li><Link to="/nosotros" onClick={handleLinkClick}>Nosotros</Link></li>
           </ul>
-          <Link to="/carrito" className="carrito-icono">
-            <img ref={iconRef} src={Carrito} alt="Carrito" className="icono-img" />
+        </div>
+        <div className="nav-icons">
+          <Link to="/carrito" className="carrito-icono" onClick={handleLinkClick}>
+            <img src={Carrito} alt="Carrito" className="icono-img" ref={iconRef} />
             {cantidadCarrito > 0 && (
               <span className="carrito-badge">{cantidadCarrito}</span>
             )}
           </Link>
+
+          <button className="menu-toggle" onClick={toggleMenu} aria-label="Abrir menú">
+            ☰
+          </button>
         </div>
       </div>
+
+
     </nav>
+
   );
 };
 

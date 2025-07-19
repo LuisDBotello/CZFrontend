@@ -46,6 +46,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 230px;
+  position: relative; 
 }
 .producto-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -138,14 +139,59 @@
 
 .button-add:hover {
   background-color:#003768;
-  transform: translateY(-2px);
+}
+.cz-icon {
+  position: absolute;
+  top: -20px;
+  right: -25px;
+  width: 60px !important;
+  height: auto !important;
+  z-index: 20;
 }
 @media (max-width: 768px) {
-  .producto-card {
-    width: 30vw;
+  .seccion-productos {
+    width: 92vw;
   }
+  .grid-productos {
+    gap: 0.6rem;
+  }
+  .producto-card {
+    width: 24vw;        /* Más pequeño aún, pero mantenible */
+    min-width: 100px;   /* Asegura que no se encoja demasiado */
+    padding: 0.4rem;
+    min-height: 150px;
+  }
+
+  .producto-card img {
+    height: 60px;       /* Imagen más pequeña */
+  }
+
+  .producto-info h3 {
+    font-size: 0.8rem;
+    height: 1.8rem;        /* Reduce altura de título */
+    -webkit-line-clamp: 2;
+    padding-top: 0;
+  }
+
+  .producto-info p {
+    font-size: 0.75rem;
+
+  }
+
+  .button-add {
+    font-size: 0.6rem !important;
+    padding: 4px 8px;
+  }
+
   .btn-scroll {
-    font-size: 1.2rem;
-    padding: 0.3rem 0.5rem;
+    font-size: 1rem;
+    padding: 0.3rem;
+  }
+
+  .cz-icon {
+    width: 40px !important;
+    top: -15px;
+    right: -15px;
   }
 }
+

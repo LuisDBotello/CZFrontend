@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/producto.css';
-import Nav from './nav';
 import ProductosRelacionados from './ProductoRelacionados';
+import { useCarrito } from '../context/carritoContext'; // 👈 Importa el contexto
 
 const PaginaProducto = () => {
   const { id } = useParams();
@@ -11,10 +11,27 @@ const PaginaProducto = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const navigate = useNavigate(); // ✅ Aquí estaba faltando
+  const navigate = useNavigate();
+  const { agregarAlCarrito } = useCarrito(); // 👈 Usa el contexto
 
   const handleBackClick = () => {
     navigate(`/`);
+  };
+
+const [agregadoIds, setAgregadoIds] = useState([]);
+
+  const handleAgregarCarrito = (e, producto) => {
+    e.stopPropagation();
+    agregarAlCarrito(producto);
+
+    setAgregadoIds(prev => [...prev, producto.artId]);
+
+    const evento = new Event('carrito-actualizado');
+    window.dispatchEvent(evento);
+
+    setTimeout(() => {
+      setAgregadoIds(prev => prev.filter(id => id !== producto.artId));
+    }, 2000);
   };
 
   useEffect(() => {
@@ -30,7 +47,6 @@ const PaginaProducto = () => {
 
   return (
     <>
-      <Nav />
       <button className='back-btn' onClick={handleBackClick}>&#8249;</button>
 
       <div className="producto-detalle">
@@ -43,7 +59,12 @@ const PaginaProducto = () => {
           <h1>{producto.artNom}</h1>
           <p className="producto-precio">${producto.artPrecio.toFixed(2)}</p>
           <p>{producto.artDescrip}</p>
-          <button className="button-add">Agregar al carrito</button>
+            <button
+              className="button-add"
+              onClick={(e) => handleAgregarCarrito(e, producto)}
+            >
+              {agregadoIds.includes(producto.artId) ? '✔️' : 'Agregar al carrito'}
+            </button>
         </div>
       </div>
 
