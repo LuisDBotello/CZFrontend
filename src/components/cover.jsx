@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 
 const Cover = () => {
   const scrollToContacto = () => {
-    const contacto = document.getElementById('ubicacion');
+    const contacto = document.getElementById('contactanos');
     if (contacto) {
-      contacto.scrollIntoView({ behavior: 'smooth' });
+      const yOffset = -100; // Ajusta este valor según lo que necesites
+      const y = contacto.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
@@ -18,10 +20,10 @@ const Cover = () => {
           <h2 className='cover-text'>Soluciones profesionales en limpieza</h2>
           <div className='cover-buttons'>
             <Link to="/tienda">
-              <button className='tienda-button'>TIENDA</button>
+              <button className='tienda-button'>Tienda</button>
             </Link>
             <button className='contact-button' onClick={scrollToContacto}>
-              CONTÁCTANOS
+              Contáctanos
             </button>
           </div>
         </div>

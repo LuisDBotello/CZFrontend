@@ -1,0 +1,121 @@
+.contact-form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 83vw;
+  justify-self: center;
+  border-radius: 1rem;
+  position: relative;
+  z-index: 20;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.contacto-left-div {
+  padding: 2rem;
+  padding-top: 1rem;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #003768;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.contact-title {
+  text-align: left;
+  color: aliceblue;
+  margin-bottom: 1rem;
+}
+
+.contacto-right-div {
+  padding: 2rem;
+  width: 50%;
+  background-color: azure;
+  color: #003768;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+
+input,
+textarea {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #009688;
+  box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.2);
+}
+
+/* Botón */
+.contacto-enviar {
+  padding: 0.75rem;
+  background-color: #00af47;
+  color: #fff;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contacto-enviar:hover {
+  background-color: #007c32;
+}
+
+/* Mensaje de estado */
+.contacto-p {
+  text-align: left;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contact-form {
+    flex-direction: column;
+    width: 90vw;
+    margin-left: 5vw;
+  }
+
+  .contacto-left-div,
+  .contacto-right-div {
+    width: 100%;
+    padding: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .contacto-left-div {
+    order: -1; /* Muestra la imagen/texto arriba en móviles si prefieres */
+  }
+}
+
+@media (max-width: 480px) {
+  input,
+  textarea {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+
+  .contacto-enviar {
+    font-size: 0.95rem;
+  }
+
+  .contact-title {
+    font-size: 1.25rem;
+  }
+}

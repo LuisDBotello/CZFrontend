@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/tienda.css';
+import '../styles/tienda.css'
 import Logo from '../assets/logo.png';
 import { useCarrito } from '../context/carritoContext'; // 👈 importa contexto
 
@@ -65,6 +65,7 @@ const LineaAutomotriz = () => {
   return (
     <section className="seccion-productos">
       <h2 className='linea-h2'>Línea Automotriz</h2>
+      <hr className='linea-hr'/>
 
       <button className="btn-scroll btn-scroll-left" onClick={handleScrollLeft} aria-label="Desplazar a la izquierda">
         &#8249;
@@ -73,7 +74,7 @@ const LineaAutomotriz = () => {
       <div ref={gridRef} className="grid-productos">
         {articulos.length === 0 && <p>No hay productos disponibles para esta línea.</p>}
         {articulos.map((item) => (
-          <div key={item.artId} className="producto-card" onClick={() => handleCardClick(item.artId)}>
+          <div key={item.artId} className="producto-carta" onClick={() => handleCardClick(item.artId)}>
             {item.artCZ && (
               <img
                 src={Logo}
@@ -87,7 +88,7 @@ const LineaAutomotriz = () => {
             />
             <div className="producto-info">
               <h3>{item.artNom}</h3>
-              <p>${item.artPrecio.toFixed(2)}</p>
+              <p className='art-precio'>${item.artPrecio.toFixed(2)}</p>
             </div>
             <button
               className="button-add"

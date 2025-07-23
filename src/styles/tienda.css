@@ -33,7 +33,7 @@
   display: none; /* Chrome, Safari */
 }
 
-.producto-card {
+.producto-carta {
   flex-shrink: 0;
   width: 8vw;
   min-width: 150px;
@@ -48,20 +48,20 @@
   min-height: 230px;
   position: relative; 
 }
-.producto-card {
+.producto-carta {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.producto-card * {
+.producto-carta * {
   text-decoration: none;
   color: inherit;
 }
-.producto-card:hover {
+.producto-carta:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   cursor:pointer;
 }
 
-.producto-card img {
+.producto-carta img {
   width: 100%;
   height: 100px;
   object-fit: contain;
@@ -74,7 +74,9 @@
   display: flex;
   flex-direction: column;
 }
-
+.art-precio{
+  align-self: left;
+}
 .producto-info h3 {
   font-size: 1rem;
   margin: 0;
@@ -87,7 +89,14 @@
   height: 2.4em;                /* Asegura altura consistente (1.2em x 2 líneas) */
 }
 
-
+.linea-hr {
+  width: 100%;
+  height: 3px;
+  background-color: #003768;
+  border: none;
+  margin: 1rem auto;
+  border-radius: 2px;
+}
 .producto-info p {
   margin: 0.25rem 0 0.5rem 0;
   color:#003768;
@@ -109,9 +118,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: min-content;
 }
 .btn-scroll:hover {
   color: #007bff; /* Cambia color al pasar el mouse */
+  background-color: transparent;
 }
 
 .btn-scroll-left {
@@ -126,7 +137,7 @@
 .button-add {
   margin-top: auto;
   padding: 6px 10px;
-  background-color:#004a8b;
+  background-color:#003768;
   color: white;
   border: none;
   border-radius: 1rem;
@@ -155,14 +166,14 @@
   .grid-productos {
     gap: 0.6rem;
   }
-  .producto-card {
+  .producto-carta {
     width: 24vw;        /* Más pequeño aún, pero mantenible */
     min-width: 100px;   /* Asegura que no se encoja demasiado */
     padding: 0.4rem;
     min-height: 150px;
   }
 
-  .producto-card img {
+  .producto-carta img {
     height: 60px;       /* Imagen más pequeña */
   }
 
@@ -184,8 +195,8 @@
   }
 
   .btn-scroll {
-    font-size: 1rem;
-    padding: 0.3rem;
+    display: none;
+
   }
 
   .cz-icon {

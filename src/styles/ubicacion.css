@@ -1,7 +1,8 @@
 .map-section {
   width: 83vw;
-  margin: 0 auto;
+  margin: 0;
   padding-bottom: 2rem;
+  justify-self: center;
 }
 
 .map-title {
@@ -84,6 +85,7 @@
   .map-title {
     font-size: 1.5rem;
     text-align: left;
+    text-indent: 5vw;
     padding-left: 0;
     position: relative;
     z-index: 25;
@@ -94,6 +96,8 @@
     height: auto;
     position: relative;
     z-index: 10;
+    width: 90vw;
+    margin-left: 5vw;
   }
 
   .ubicacion-contacto,

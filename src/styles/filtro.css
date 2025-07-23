@@ -1,0 +1,175 @@
+.rango-precio-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: #444;
+  width: 100%;
+}
+.filtro-item select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  appearance: none; /* elimina la flecha nativa en algunos navegadores */
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.categoria-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.categoria-btn {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.categoria-btn:hover {
+  background-color: #e0f4ff;
+  border-color: #006bb3;
+}
+
+.categoria-btn.activa {
+  background-color: #006bb3;
+  color: white;
+  border-color: #006bb3;
+}
+.filtro-item select:focus {
+  border-color: #006bb3;
+  outline: none;
+}
+.rango-precio-slider {
+  position: relative;
+  height: 40px;
+}
+
+/* Ambos sliders se ven encima */
+.rango-precio-slider input[type="range"] {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  appearance: none;
+  background: transparent;
+  pointer-events: none; /* Permite superponer sin conflicto */
+  height: 6px;
+  margin: 0;
+}
+
+/* Para que los thumbs sí se puedan mover */
+.rango-precio-slider input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  appearance: none;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #006bb3;
+  cursor: pointer;
+  border: none;
+  margin-top: -6px;
+}
+
+.rango-precio-slider input[type="range"]::-moz-range-thumb {
+  pointer-events: auto;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #006bb3;
+  cursor: pointer;
+  border: none;
+}
+
+/* Track Chrome/Safari */
+.rango-precio-slider input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  background: #006bb3;
+  border-radius: 5px;
+}
+
+/* Track Firefox */
+.rango-precio-slider input[type="range"]::-moz-range-track {
+  height: 6px;
+  background: #006bb3;
+  border-radius: 5px;
+}
+.tienda-filtros {
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  width: 20vw;
+  flex: 1 1 450px;
+  max-width: 450px;
+}
+.tienda-productos{
+  flex: 1 1 600px;
+
+}
+.tienda-layout {
+  display: flex;
+  gap: 0rem;
+}
+
+.filtro-item {
+  margin-bottom: 1.5rem; /* más espacio entre elementos */
+}
+
+.filtro-item label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.filtro-aplicar {
+  width: 100%;
+  background-color: #00af47;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.filtro-aplicar:hover {
+  background-color: #00796b;
+}
+@media (max-width: 768px) {
+  .tienda-layout {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .tienda-filtros {
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    padding: 1rem;
+    background-color: #f9f9f9;
+  }
+
+  .filtro-item {
+    margin-bottom: 1.2rem;
+  }
+
+  .filtro-aplicar {
+    width: 100%;
+  }
+
+  .categoria-opciones {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

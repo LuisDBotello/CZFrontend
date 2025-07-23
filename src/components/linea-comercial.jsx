@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/tienda.css';
+import '../styles/tienda.css'
 import Logo from '../assets/logo.png';
 import { useCarrito } from '../context/carritoContext'; // 👈 usa contexto
 
@@ -65,6 +65,7 @@ const LineaComercial = () => {
   return (
     <section className="seccion-productos">
       <h2 className='linea-h2'>Línea Comercial</h2>
+      <hr className='linea-hr'/>
 
       <button className="btn-scroll btn-scroll-left" onClick={handleScrollLeft} aria-label="Desplazar a la izquierda">
         &#8249;
@@ -73,7 +74,7 @@ const LineaComercial = () => {
       <div ref={gridRef} className="grid-productos">
         {articulos.length === 0 && <p>No hay productos disponibles para esta línea.</p>}
         {articulos.map((item) => (
-          <div key={item.artId} className="producto-card" onClick={() => handleCardClick(item.artId)}>
+          <div key={item.artId} className="producto-carta" onClick={() => handleCardClick(item.artId)}>
             {item.artCZ && (
               <img
                 src={Logo}

@@ -1,0 +1,236 @@
+.tienda-container {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  margin-top: 8vh;
+  width: 90%;
+  justify-self: center;
+  border-radius: 0 0 1rem 1rem;
+  margin-bottom: 1rem;
+}
+.tienda-layout{
+    display: flex;
+    gap: 2rem;
+}
+.tienda-titulo {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #004a8f;
+}
+.tienda-filtros{
+    width: 25%;
+}
+
+.tienda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0rem;
+  width: 100%;
+}
+
+.tienda-producto {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.tienda-producto:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tienda-logo-cz {
+  width: 32px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.tienda-imagen {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.tienda-info {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.tienda-nombre {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #222;
+  margin: 0;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;         /* Limita a 2 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tienda-precio {
+  font-size: 1rem;
+  color: #004a8f;
+  font-weight: bold;
+  margin-top: 0.5rem; /* Empuja el botón al final */
+
+}
+
+.tienda-btn-agregar {
+  margin-top: auto; /* Empuja el botón al final */
+  background-color: #004a8f;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  width: 100%;
+  transition: background-color 0.3s;
+  font-size: 0.95rem;
+}
+
+.tienda-btn-agregar:hover {
+  background-color: #003768;
+  cursor: pointer;
+}
+
+.tienda-mensaje-vacio {
+  text-align: center;
+  color: #888;
+}
+
+.cargando {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+.tienda-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.paginacion {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.paginacion-btn {
+  background-color: #f0f0f0;
+  border: 2px;
+  padding: 0.5rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  font-weight: bold;
+
+}
+
+.paginacion-btn.active {
+  background-color: #004a8f !important;
+  color: white;
+  font-weight: bold;
+}
+.paginacion-btn:hover {
+  background-color: #e0e0e0;
+}
+
+
+/* RESPONSIVE adjustments */
+@media (max-width: 768px) {
+  .paginacion {
+    justify-content: center;
+    padding-bottom: 1rem;
+  }
+}
+/* Responsivo */
+@media (max-width: 768px) {
+  .tienda-grid {
+    grid-template-columns: 1fr; /* una sola columna para móviles */
+    margin-right: 0;
+  }
+  .tienda-container{
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-left: 1rem;
+    align-self: center;
+    align-items: center;
+  }
+  .tienda-producto {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    flex-direction: row;
+    border: 1px solid #ccc;
+    height: 12vh;    
+    padding-top: 0;
+  }
+  .tienda-nombre {
+    min-width: 30vw;
+  }
+  .tienda-imagen {
+    width: 70px;
+    height: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  .tienda-info {
+    flex-grow: 1;
+  }
+
+  .tienda-nombre {
+    font-size: 1rem;
+    padding-top: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  .tienda-precio {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color:#004a8f;
+  }
+
+.tienda-btn-agregar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.7rem;
+  font-size: 1.3rem;
+  max-width: 35px;
+  max-height: 30px;
+  cursor: pointer;
+}
+
+  .tienda-logo-cz {
+    display: none; /* Opcional: puedes ocultarlo para móviles */
+  }
+}
+
+.tienda-filtros {
+  width: 30vw;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.082);
+  font-family: 'Segoe UI', sans-serif;
+  margin-right: 2rem;
+}
+

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/producto.css';
 import ProductosRelacionados from './ProductoRelacionados';
-import { useCarrito } from '../context/carritoContext'; // 👈 Importa el contexto
+import { useCarrito } from '../context/carritoContext';
 
 const PaginaProducto = () => {
   const { id } = useParams();
@@ -12,10 +12,10 @@ const PaginaProducto = () => {
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
-  const { agregarAlCarrito } = useCarrito(); // 👈 Usa el contexto
+  const { agregarAlCarrito } = useCarrito();
 
   const handleBackClick = () => {
-    navigate(`/`);
+    navigate(-1);
   };
 
 const [agregadoIds, setAgregadoIds] = useState([]);
@@ -48,7 +48,7 @@ const [agregadoIds, setAgregadoIds] = useState([]);
   return (
     <>
       <button className='back-btn' onClick={handleBackClick}>&#8249;</button>
-
+      
       <div className="producto-detalle">
         <img
           src={producto.artFoto ? `http://192.168.100.53:8080/${producto.artFoto}` : '/img/default.jpg'}

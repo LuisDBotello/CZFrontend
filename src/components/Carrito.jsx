@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/carrito.css';
 import MasVendidos from './mas-vendidos';
 import { useCarrito } from '../context/carritoContext';
+import { Trash2 } from "lucide-react";
+
 
 const Carrito = () => {
   const { carrito, eliminarDelCarrito, limpiarCarrito, actualizarCantidad } = useCarrito();
@@ -36,7 +38,8 @@ const Carrito = () => {
 
   return (
     <div className="carrito-container">
-      <h1>Tu carrito</h1>
+      <h1>Carrito</h1>
+      <hr className='linea-hr'/>
 
       {carrito.length === 0 ? (
         <p>Tu carrito está vacío.</p>
@@ -56,12 +59,12 @@ const Carrito = () => {
                   <h3>{item.artNom}</h3>
                   <p>${item.artPrecio.toFixed(2)}</p>
                   <div className="cantidad-control">
-                  <button onClick={(e) => {
+                  <button className="cantidad-control-button" onClick={(e) => {
                     e.stopPropagation();
                     actualizarCantidad(item.artId, (item.cantidad || 1) - 1);
                   }}>-</button>
                   <span>{item.cantidad || 1}</span>
-                  <button onClick={(e) => {
+                  <button className="cantidad-control-button" onClick={(e) => {
                     e.stopPropagation();
                     actualizarCantidad(item.artId, (item.cantidad || 1) + 1);
                   }}>+</button>
@@ -73,7 +76,7 @@ const Carrito = () => {
                       }}
                       className="carrito-btn-eliminar"
                     >
-                      Eliminar
+                    <Trash2 size={14} />
                     </button>
                   </div>
                 </div>

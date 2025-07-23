@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/carritoContext'; // 👈 usa tu contexto
+import '../styles/tienda.css'
 
 const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
   const [relacionados, setRelacionados] = useState([]);
@@ -75,11 +76,13 @@ const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
   return (
     <section className="seccion-productos">
       <h2 className="linea-h2">Podría interesarte</h2>
+      <hr className='linea-hr'/>
+
       <div className="grid-productos">
         {relacionados.map(prod => (
           <div
             key={prod.artId}
-            className="producto-card"
+            className="producto-carta"
             onClick={() => navigate(`/producto/${prod.artId}`)}
           >
             <img

@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/nav.css';
-import Logo from '../assets/LogoIni.png';
-import Carrito from '../assets/carrito.png';
+import  Logo from '../assets/LogoIni.png'
+import Carrito from '../assets/carrito.png'
+
 
 const Nav = () => {
   const [cantidadCarrito, setCantidadCarrito] = useState(0);
   const [menuAbierto, setMenuAbierto] = useState(false);
   const iconRef = useRef(null);
+  
 
   useEffect(() => {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -39,7 +41,14 @@ const Nav = () => {
   const handleLinkClick = () => {
     if (menuAbierto) setMenuAbierto(false);
   };
-
+const scrollToContacto = () => {
+  const contacto = document.getElementById('contactanos');
+  if (contacto) {
+    const yOffset = -100; // Ajusta este valor según lo que necesites
+    const y = contacto.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+};
   return (
     <nav className="nav">
       <div className="nav-container">
@@ -55,7 +64,7 @@ const Nav = () => {
           <ul className="nav-links">
             <li><Link to="/" onClick={handleLinkClick}>Inicio</Link></li>
             <li><Link to="/tienda" onClick={handleLinkClick}>Tienda</Link></li>
-            <li><Link to="/contacto" onClick={handleLinkClick}>Contacto</Link></li>
+            <li><Link to="/" onClick={scrollToContacto}>Contacto</Link></li>
             <li><Link to="/nosotros" onClick={handleLinkClick}>Nosotros</Link></li>
           </ul>
         </div>

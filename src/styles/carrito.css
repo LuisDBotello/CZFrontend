@@ -19,8 +19,8 @@
 }
 .carrito-container h1 {
   text-align: left;
-  color: #004a8b;
-  margin-bottom: 2rem;
+  color: #003768;
+  margin-bottom: 0rem;
 }
 .carrito-lista {
   flex: 1;
@@ -66,8 +66,7 @@
   margin: 0.2rem 0;
   color: #555;
   font-size: 0.9rem;
-}
-
+} 
 .carrito-btn-eliminar {
   background-color: #cc0000 !important;
   color: white;
@@ -77,6 +76,9 @@
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease;
+  max-width:min-content;
+  max-height: 26px;
+  border-radius: 5px;
 }
 
 .carrito-btn-eliminar:hover {
@@ -96,7 +98,8 @@
 }
 .descuento-section {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0rem;
   margin: 1rem 0;
 }
 
@@ -172,7 +175,7 @@
   margin-top: 0.5rem;
 }
 
-.cantidad-control button {
+.cantidad-control-button {
   padding: 4px 10px;
   font-size: 1rem;
   background-color: #004a8b;
@@ -180,6 +183,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  max-width: min-content;
 }
 
 .cantidad-control span {
@@ -291,7 +295,8 @@
   .carrito-btn-eliminar {
     margin: 0;
     padding: 6px 14px;
-    align-self: center; /* 🔥 Fuerza que esté alineado al centro */
+    max-height: 28px;
+    align-self: center;
     white-space: nowrap;
   }
 }
