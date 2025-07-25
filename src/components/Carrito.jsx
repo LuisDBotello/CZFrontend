@@ -1,40 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/carrito.css';
 import MasVendidos from './mas-vendidos';
 import { useCarrito } from '../context/carritoContext';
 import { Trash2 } from "lucide-react";
 
-
 const Carrito = () => {
+  const [resumen, setResumen] = useState({ subtotal: 0, envio: 0 });
   const { carrito, eliminarDelCarrito, limpiarCarrito, actualizarCantidad } = useCarrito();
+
+  useEffect(() => {
+    if (carrito.length === 0) return;
+    const payload = carrito.map(item => ({
+      artId: item.artId,
+      cantidad: item.cantidad || 1
+    }));
+    fetch('http://192.168.100.53:8080/api/carrito/calcsub', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(r => r.json())
+      .then(data => setResumen(data))
+      .catch(err => console.error(err));
+  }, [carrito]);
+
+  const [codigoDescuento, setCodigoDescuento] = useState("");
+  const [porcentajeDescuento, setPorcentajeDescuento] = useState(0);
   const navigate = useNavigate();
 
-  const [codigoDescuento, setCodigoDescuento] = useState('');
-  const [porcentajeDescuento, setPorcentajeDescuento] = useState(0);
-
-  // Subtotal
-  const subtotal = carrito.reduce((acc, item) => acc + item.artPrecio * (item.cantidad || 1), 0);
-
-  // Envío gratis si el subtotal es mayor a 400
-  const envio = subtotal > 400 ? 0 : 50;
-
-  // Descuentos disponibles
-  const codigosValidos = {
-    'PROMO10': 10,
-    'SALE20': 20,
-    'DESCUENTO30': 30,
-  };
-
-  // Aplica descuento
+  const descuento = resumen.subtotal * (porcentajeDescuento / 100);
+  const total = resumen.subtotal - descuento + resumen.envio;
   const aplicarDescuento = () => {
-    const porcentaje = codigosValidos[codigoDescuento.toUpperCase()];
-    setPorcentajeDescuento(porcentaje || 0);
+    if (codigoDescuento === "PROMO10") {
+      setPorcentajeDescuento(10);
+    } else {
+      setPorcentajeDescuento(0);
+    }
   };
+  useEffect(() => {
+    if (carrito.length === 0) return;
 
-  // Calcular descuento y total
-  const descuento = (subtotal * porcentajeDescuento) / 100;
-  const total = subtotal - descuento + envio;
+    const datosParaBackend = carrito.map(item => ({
+      artId: item.artId,
+      cantidad: item.cantidad || 1
+    }));
+
+    const enviarCarrito = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/carrito/calcsub', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(datosParaBackend)
+        });
+
+        if (!response.ok) {
+          console.error('Error al enviar carrito');
+        } else {
+          const res = await response.json();
+          console.log('Carrito enviado automáticamente:', res);
+        }
+      } catch (error) {
+        console.error('Error de red al enviar carrito:', error);
+      }
+    };
+
+    enviarCarrito();
+  }, [carrito]); // Se ejecuta cada vez que cambia el carrito
 
   return (
     <div className="carrito-container">
@@ -85,14 +119,13 @@ const Carrito = () => {
           </ul>
 
           <div className="carrito-resumen">
-            <div className='desglose'>
-              <h2>Subtotal:</h2> 
-              <h2>${subtotal.toFixed(2)}</h2>
+            <div className="desglose">
+              <h2>Subtotal:</h2>
+              <h2>${(resumen.subtotal ?? 0).toFixed(2)}</h2>
             </div>
-
-            <div className='desglose'>
-              <h2>Envío:</h2> 
-              <h2>{envio === 0 ? 'Gratis' : `$${envio.toFixed(2)}`}</h2>
+            <div className="desglose">
+              <h2>Envío:</h2>
+              <h2>{(resumen.envio ?? 0) === 0 ? 'Gratis' : `$${(resumen.envio ?? 0).toFixed(2)}`}</h2>
             </div>
 
             <div className="descuento-section">

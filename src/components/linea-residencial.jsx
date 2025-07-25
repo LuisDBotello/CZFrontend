@@ -89,7 +89,18 @@ const LineaResidencial = () => {
             />
             <div className="producto-info">
               <h3>{item.artNom}</h3>
-              <p>${item.artPrecio.toFixed(2)}</p>
+              <div className="precios">
+                {item.artDescuento > 0 ? (
+                  <>
+                    <p className="precio-original">${item.artPrecio.toFixed(2)}</p>
+                    <p className="precio-descuento">
+                      ${ (item.artPrecio - item.artDescuento).toFixed(2) }
+                    </p>
+                  </>
+                ) : (
+                  <p className="precio-normal">${item.artPrecio.toFixed(2)}</p>
+                )}
+              </div>
             </div>
             <button
               className="button-add"

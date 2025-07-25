@@ -57,17 +57,17 @@ const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
   }, [nombreProducto, lineaId, actualId]);
   const [agregadoIds, setAgregadoIds] = useState([]);
 
-  const handleAgregarCarrito = (e, item) => {
+  const handleAgregarCarrito = (e, prod) => {
     e.stopPropagation();
-    agregarAlCarrito(item);
+    agregarAlCarrito(prod);
 
-    setAgregadoIds(prev => [...prev, item.artId]);
+    setAgregadoIds(prev => [...prev, prod.artId]);
 
     const evento = new Event('carrito-actualizado');
     window.dispatchEvent(evento);
 
     setTimeout(() => {
-      setAgregadoIds(prev => prev.filter(id => id !== item.artId));
+      setAgregadoIds(prev => prev.filter(id => id !== prod.artId));
     }, 2000);
   };
   if (loading) return <p>Cargando productos relacionados...</p>;
@@ -91,7 +91,18 @@ const ProductosRelacionados = ({ nombreProducto, lineaId, actualId }) => {
             />
             <div className="producto-info">
               <h3>{prod.artNom}</h3>
-              <p>${prod.artPrecio.toFixed(2)}</p>
+              <div className="precios">
+                {prod.artDescuento > 0 ? (
+                  <>
+                    <p className="precio-original">${prod.artPrecio.toFixed(2)}</p>
+                    <p className="precio-descuento">
+                      ${ (prod.artPrecio - prod.artDescuento).toFixed(2) }
+                    </p>
+                  </>
+                ) : (
+                  <p className="precio-normal">${prod.artPrecio.toFixed(2)}</p>
+                )}
+              </div>         
             </div>
             <button
               className="button-add"

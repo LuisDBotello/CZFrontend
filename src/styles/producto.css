@@ -72,7 +72,29 @@
   justify-content: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
+.pag-precios{
+  display: flex;
+  gap: 1rem;
+}
+.pag-precio-original{
+  font-size: 1.5rem;
+  text-decoration: line-through;
+  color: #003768;  
+  margin-top: 0;
 
+}
+.pag-precio-descuento{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #116500;
+  margin-top: 0;
+
+}
+.pag-precio-normal{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #003768;
+}
 .back-btn:hover {
   background-color: #003768;
   transform: translateY(-2px);

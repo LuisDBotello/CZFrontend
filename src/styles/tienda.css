@@ -70,16 +70,41 @@
 }
 
 .producto-info {
-  flex-grow: 1;
+  flex-grow: 0;
   display: flex;
   flex-direction: column;
 }
 .art-precio{
   align-self: left;
 }
+.precios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.precio-original {
+  color: #777;
+  text-decoration: line-through;
+  font-size: 1rem;
+}
+
+.precio-descuento {
+  color: green; /* rojo */
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.precio-normal {
+  color: #003768; /* o hereda del contenedor */
+  font-weight: bold;
+  margin-bottom: 0;
+}
 .producto-info h3 {
   font-size: 1rem;
   margin: 0;
+  margin-bottom: 0.2rem;
   line-height: 1.2;
   display: -webkit-box;
   -webkit-line-clamp: 2;       /* Limita a 2 líneas */
@@ -97,11 +122,7 @@
   margin: 1rem auto;
   border-radius: 2px;
 }
-.producto-info p {
-  margin: 0.25rem 0 0.5rem 0;
-  color:#003768;
-  font-weight: bold;
-}
+
 .btn-scroll {
   position: absolute;
   top: 40%;
@@ -135,7 +156,7 @@
   transform: translateX(50%);
 }
 .button-add {
-  margin-top: auto;
+  margin-top: 0.5rem;
   padding: 6px 10px;
   background-color:#003768;
   color: white;
@@ -158,6 +179,12 @@
   width: 60px !important;
   height: auto !important;
   z-index: 20;
+}
+.pag-precio-original{
+  font-size: 1.5rem;
+}
+.pag-precio-descuento{
+
 }
 @media (max-width: 768px) {
   .seccion-productos {
@@ -186,9 +213,18 @@
 
   .producto-info p {
     font-size: 0.75rem;
-
+    margin-bottom: 0;
   }
-
+  .precios{
+    gap:0.3rem;
+    row-gap: 0;
+  }
+  .precio-original {
+    margin: 0;
+  }
+  .precio-descuento {
+    margin: 0;
+  }
   .button-add {
     font-size: 0.6rem !important;
     padding: 4px 8px;

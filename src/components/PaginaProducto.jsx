@@ -57,7 +57,18 @@ const [agregadoIds, setAgregadoIds] = useState([]);
         />
         <div className="producto-info-detalle">
           <h1>{producto.artNom}</h1>
-          <p className="producto-precio">${producto.artPrecio.toFixed(2)}</p>
+          <div className="pag-precios">
+            {producto.artDescuento > 0 ? (
+              <>
+                <p className="pag-precio-original">${producto.artPrecio.toFixed(2)}</p>
+                <p className="pag-precio-descuento">
+                  ${ (producto.artPrecio - producto.artDescuento).toFixed(2) }
+                </p>
+              </>
+            ) : (
+              <p className="pag-precio-normal">${producto.artPrecio.toFixed(2)}</p>
+            )}
+          </div>         
           <p>{producto.artDescrip}</p>
             <button
               className="button-add"
